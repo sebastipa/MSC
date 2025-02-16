@@ -1,0 +1,65 @@
+% Multi-Scale Model - user input file
+% This file contains user input parameters for the multi-scale model
+
+% File Type  : settings.dw
+% Ref. Frame : absolute
+% Language   : english
+
+% SOLUTION CONTROLS ------------------------------------------------------------------------------------------ 
+
+iterations              3              number of coupling iterations (min 1)
+deepArray               0              zero: no, two: add deep array effects (only improves in random farm configurations)
+localInduction          1              add local turbine induction 
+readTurbineThrust       0              thrust from LES (wrapper for TOSCA turbine data)
+readTurbineCtPrime      0              disk averaged thrust coefficient from LES (wrapper for TOSCA turbine data)
+periodicSpanwise        0              periodize the wind turbine distribution in the spanwise direction 
+ablModel                2              one: Nieuwstadt, two: .nc/.dat input from PALM/TOSCA
+bkStateName             tosca          only required if ablModel = 2 (PALM input: palm, TOSCA input: tosca)
+displayMicroScale       0              computes also microscale wind around the wind farm (COMPUTATIONALLY EXPENSIVE, for post processing)
+wakeModelLogLaw         1              zero: use uniform inflow for wake model RHS, one: use log inflow for wake model RHS
+singlePointCoupling     0              if set to one performs the original 3LM one-point coupling
+mirrorWindFarm          1              if set to one mirrors the wind farm w.r.t. the ground
+excludeBackground       0              if set to one excludes the background wind variation (wake model alone and induction if activated)
+
+% ABL PARAMETERS ---------------------------------------------------------------------------------------------- 
+
+rho                     1.225          reference air density [Kg/m3]
+nu                      1.5e-5         kinematic viscosity [m2/s]
+g                       9.81           mag of gravitational acceleration [m/s2]
+Tref                    300            reference ground temperature [K]
+Uref                    9 0            reference wind vector at hub height [m/s]
+Href                    90             reference hub height [m]
+H                       500            reference ABL height [m]
+dTH                     4.895          T jump across capping [K]
+dTdz                    1              lapse rate above capping [K/Km]
+dTdzABL                 0              lapse rate below capping [K/Km]
+z0                      0.05           equivalent roughness length [m]
+TI                      8.94           turbulence intensity percent [%]
+lat                     41.3334        latitude [deg]    
+
+% DOMAIN PARAMETERS -------------------------------------------------------------------------------------------   
+   
+xsMeso                  -200           x mesoscale domain start [Km] 
+xeMeso                  200            x mesoscale domain end [Km]
+ysMeso                  -100           y mesoscale domain start [Km] 
+yeMeso                  103            y mesoscale domain end [Km]         
+dxMeso                  500            mesoscale domain discretization in x dir [m] 
+dyMeso                  500            mesoscale domain discretization in y dir [m] 
+
+% WIND FARM PARAMETERS  ---------------------------------------------------------------------------------------
+
+xsFarm                  0              x farm start [Km]
+ysFarm                  0.3            y farm start [Km]
+farmInputType           1              one: aligned wind farm, two: staggered wind farm, three: read from excel  
+excelName               N4.xlsx        name of the excel file where the turbine coords are saved 
+Sx                      5              x turbine spacing in diameters (discarded if farmInputType = three)
+Sy                      4.7619         y turbine spacing in diameters (discarded if farmInputType = three)
+Nty                     5              y number of wind turbines (discarded if farmInputType = three)
+Ntx                     20             x number of wind turbines (discarded if farmInputType = three)
+D                       126            turbine diameter [m] (discarded if farmInputType = three)
+zHub                    90             turbine hub-height [m] (discarded if farmInputType = three)
+useTurbineCurves        1              zero: constant Ct and Cp (below), one: read curves from input/turbineCurves.mat (wind, cp, ct tables)
+Ct                      0.85          defalut value of turbine thrust coeff (discarded if farmInputType = three)
+Cp                      0.5            defalut value of turbine power coeff (discarded if farmInputType = three)
+
+
