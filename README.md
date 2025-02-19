@@ -1,6 +1,8 @@
 # MSC
 
-The Multiscale Coupled Model - Matlab Implementation   
+The Multiscale Coupled Model - Matlab Implementation  
+
+For questions or bugs please open an issue or report to sebastiano.stipa@vki.ac.be
 
 This model has been implemented by Sebastiano Stipa, during his PhD at the University of British Columbia. The MSC model couples a wake model to 
 an atmospheric perturbation model in order to capture the wind farm interaction with the atmospheric boundary layer (ABL). The MSC model has been 
@@ -33,7 +35,7 @@ where you wish to run the model, so that the repository folder is left *as-is*. 
 
 Within the ``msc`` directory, the user needs to create an ``input`` directory, where the input files and data required to run the MSC model will be contained. The minimum required input file for the MSC model is called ``settings.msm``. Four examples are included in the ``tests`` folder, so that the user can get familiar with running the model. In order to run any of these examples, copy the content of the example directory (e.g. ``rectang_wf_subcritical``) inside the ``input`` directory that has been created within the ``msc`` directory, then run the ``main.m`` in Matlab. 
 
-For additional cases, the user may not be able to generate the ``ABL_averaging.mat`` input file, which contains results from a TOSCA LES of the ABL. nor the ``turbineCurves.m`` file, which contains the turbine-manufacturer curves that allow to run the model in *variable Ct* mode. If this is the case, certain parameters can be set inside the ``settings.msm`` file which make these data not required, as they are calculated directly by the MSC model. 
+For additional cases, the user may not be able to generate the ``ABL_averaging.mat`` input file, which contains results from a TOSCA LES of the ABL, nor the ``turbineCurves.m`` file, which contains the turbine-manufacturer curves that allow to run the model in variable-Ct mode. If this is the case, certain parameters can be set inside the ``settings.msm`` file which make these data not required, as they are calculated directly by the MSC model. 
 
 The parameters of the ``settings.msm`` file, together with their description, are summarized in the following table:
 
@@ -85,19 +87,23 @@ The parameters of the ``settings.msm`` file, together with their description, ar
 | Ct                      | default value of turbine thrust coeff (discarded if farmInputType = three)                                  |
 | Cp                      | default value of turbine power coeff (discarded if farmInputType = three)                                   |    
 
-Notably, the ``ABL_averaging.mat`` is required if *ablModel* is set to 2 and *bkStateName* is set to *tosca*. For PALM, differnt data is required (but it has been a long time that the MSC model is not tested using the PALM output). If *ablModel* is set to 1 the MSC will run the Nieuwstadt model internally, which provides the required inputs. Notably, the Nieuwstadt model is a very good ABL model that takes both veer and shear into 
+Notably, the ``ABL_averaging.mat`` is required if *ablModel* is set to 2 and *bkStateName* is set to *tosca*. For PALM, different data is required (although it has been a long time that the MSC model has not been tested using the PALM output). If *ablModel* is set to 1, the MSC will run the Nieuwstadt model internally, which provides the required inputs. Notably, the Nieuwstadt model is a very good ABL model that takes both veer and shear into 
 account. Using an LES input like PALM or TOSCA does not add any information and it is only suggested when comparing against LES in order to remove the bias produced by different ABL states (and so not strictly due to the MSC model itself). 
 
-Furhtermore, if the user wants to simulate an arbitrary wind farm, an excel file similar to those provided in the ``arbitrary_wf_stable`` and  ``arbitrary_wf_neutral`` examples is required. Please note that the coordinates provided in the file are always rescaled based on the minimum x and y points. Notably, rectancular aligned and staggered wind farms can be defined directly from the ``settings.msm`` file without the need to provide and excel file, upon specifying the number of turbines in x and y, as well as their spacing. 
+Furhtermore, if the user wants to simulate an arbitrary wind farm, an excel file similar to those provided in the ``arbitrary_wf_stable`` and  ``arbitrary_wf_neutral`` examples is required. Please note that the coordinates provided in the file are always rescaled by the MSC model based on the minimum x and y points. Rectancular aligned and staggered wind farms can be defined directly from the ``settings.msm`` file without the need to provide and excel file, upon specifying the number of turbines in x and y, as well as their spacing. 
 
-If the user does not have the turbine curves from the manufacturer (those provided are for the NREL5MW derived from LES), a constant Ct can be used by setting ``useTurbineCurves`` to zero. 
+If the user does not have the turbine curves from the manufacturer (those provided in the examples are for the NREL5MW and they have been derived from LES using TOSCA), a constant Ct can be used by setting ``useTurbineCurves`` to zero. 
 
-The MSC model output is saved into a ``.mat`` file that can be read by Matlab. The dataset contains the following structs:
+## Outputs
+
+The MSC model output is saved into a ``.mat`` file that can be read by Matlab and post-processed with ad-hoc code. The dataset contains the following structs:
 - sol   : numerical solution settings and run info
 - abl   : atmospheric boundary layer (background state) data 
 - meso  : atmopsheric perturbation solution fields 
 - farm  : turbine data 
 - micro : microscale hub-height fields
 
-Notably, the fields ``micro.u`` and ``micro.v``, calculated by setting ``displayMicroScale`` to 1, are super-expensive to compute (although their computation is parallelized). This is because for each turbine, the wake model and the local induction model (if activated) have to be evaluated for each point of the microscale domain mesh. Note that this is NOT how wake models are usually run. In fact, wake models are usually only evaluated at the turbine locations, as they are analythical, because only the wind speed at these location is required in order to calculate turbine power. However, the option ``displayMicroScale`` may be activated if one wishes to create a nice viosualization, even if it does not add anything to the MSC model. 
+Notably, the fields ``micro.u`` and ``micro.v``, calculated by setting ``displayMicroScale`` to 1, are super-expensive to compute (although their computation is parallelized). This is because for each turbine, the wake model and the local induction model (if activated) have to be evaluated for each point of the microscale domain mesh. Note that this is **NOT** how wake models are usually run. In fact, wake models are usually only evaluated at the turbine locations because only the wind speed at these location is required to calculate turbine power. However, the option ``displayMicroScale`` **MAY** be activated if one wishes to create a nice visualization, even if it does not add anything to the MSC model. 
+
+Happy use of the MSC model!
   
