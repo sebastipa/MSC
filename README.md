@@ -21,7 +21,7 @@ important aspect of the flow around wind farms, namely individual wakes, local b
 A special thanks in developing the model goes to Joshua Brinkerhoff, Nick Robinson, Arjun Ajay and Dries Allaerts who all added, especially Dries, valuable intellectual contributions 
 to the ideation and development of the MSC model. 
 
-The MSC model has been already incorporated into commercial wind farm design codes (OpenWind), as well as more comprehensive open-source packages (WAYVE, https://iopscience.iop.org/article/10.1088/1742-6596/2767/9/092079). This implementation is the original MSC implementation, which stands here as a proof of concept for the model and as a platform for future 
+The MSC model has been already incorporated into commercial wind farm design codes (OpenWind), as well as comprehensive open-source packages (WAYVE, https://iopscience.iop.org/article/10.1088/1742-6596/2767/9/092079). This implementation is the original MSC implementation, which stands here as a proof of concept for the model and as a platform for future 
 implementations and additions. 
 
 We hope that you will find the model useful. 
@@ -31,7 +31,7 @@ We hope that you will find the model useful.
 The MSC model is fairly easy to run, in that only a working Matlab installation is required. In order to run the model, copy the content of the ``src`` directory into the location 
 where you wish to run the model, so that the repository folder is left *as-is*. The name of the new location that is a copy of the ``src`` directory is completely arbitrary and it will be referred in the following as ``msc``.
 
-Within the ``msc`` directory, the user needs to create an ``input`` directory, where the input files and data required to run the MSC model will be contained. The minimum required input file for the MSC model is called ``settings.msm``. Four examples are included in the ``tests`` folder, so that the user can get familiar with running the model. In order to run any of these examples, copy the content of the example directory (e.g. `rectang_wf_subcritical``) inside the ``input`` directory that has been created within the ``msc`` directory, then run the ``main.m`` in Matlab. 
+Within the ``msc`` directory, the user needs to create an ``input`` directory, where the input files and data required to run the MSC model will be contained. The minimum required input file for the MSC model is called ``settings.msm``. Four examples are included in the ``tests`` folder, so that the user can get familiar with running the model. In order to run any of these examples, copy the content of the example directory (e.g. ``rectang_wf_subcritical``) inside the ``input`` directory that has been created within the ``msc`` directory, then run the ``main.m`` in Matlab. 
 
 For additional cases, the user may not be able to generate the ``ABL_averaging.mat`` input file, which contains results from a TOSCA LES of the ABL. nor the ``turbineCurves.m`` file, which contains the turbine-manufacturer curves that allow to run the model in *variable Ct* mode. If this is the case, certain parameters can be set inside the ``settings.msm`` file which make these data not required, as they are calculated directly by the MSC model. 
 
