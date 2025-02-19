@@ -1,6 +1,6 @@
 # MSC
 
-The Multiscale Coupled Model - Matlab Implementation 
+The Multiscale Coupled Model - Matlab Implementation   
 
 This model has been implemented by Sebastiano Stipa, during his PhD at the University of British Columbia. The MSC model couples a wake model to 
 an atmospheric perturbation model in order to capture the wind farm interaction with the atmospheric boundary layer (ABL). The MSC model has been 
