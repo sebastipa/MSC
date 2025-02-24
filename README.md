@@ -8,7 +8,9 @@ This model has been implemented by Sebastiano Stipa, during his PhD at the Unive
 an atmospheric perturbation model in order to capture the wind farm interaction with the atmospheric boundary layer (ABL). The MSC model has been 
 published in the Journal of Wind Energy Science (https://wes.copernicus.org/articles/9/1123/2024/wes-9-1123-2024.html) where its theory is explained 
 and verification is carried out against large-eddy simulations conducted using the Toolbox fOr Stratified Convective Atmospheres 
-(TOSCA, https://github.com/sebastipa/TOSCA).  
+(TOSCA, https://github.com/sebastipa/TOSCA). 
+
+The MSC and TOSCA projects have been supported by the Natural Sciences and Engineering Council of Canada, grant no. 556326, in a collaboration between UL Renewables and the Univerisity of British Columbia, Okanagan. 
 
 This implementation also feature a deep-array module which, upon activation, allows to take into account the evolution of cluster wakes better than 
 wake models alone. This part of the model has not been published in any journal yet, but it is described in Sebastiano Stipa's PhD thesis (https://open.library.ubc.ca/soa/cIRcle/collections/ubctheses/24/items/1.0442080). 
